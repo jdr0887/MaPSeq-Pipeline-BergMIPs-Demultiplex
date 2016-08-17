@@ -27,7 +27,7 @@ public class CASAVAMessageTest {
         try {
             connection = connectionFactory.createConnection();
             session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            Destination destination = session.createQueue("queue/gs.casava");
+            Destination destination = session.createQueue("queue/bergmips.casava");
             MessageProducer producer = session.createProducer(destination);
             producer.setDeliveryMode(DeliveryMode.PERSISTENT);
 

@@ -22,10 +22,10 @@ public class CASAVAServiceImplTest {
     @Test
     public void testUpload() {
 
-        QName serviceQName = new QName("http://casava.gs.ws.mapseq.unc.edu", "GSCASAVAService");
+        QName serviceQName = new QName("http://demultiplex.bergmips.ws.mapseq.unc.edu", "BergMIPsDemultiplexService");
         Service service = Service.create(serviceQName);
-        QName portQName = new QName("http://casava.gs.ws.mapseq.unc.edu", "GSCASAVAPort");
-        service.addPort(portQName, SOAPBinding.SOAP11HTTP_BINDING, String.format("http://%s:%d/cxf/GSCASAVAService", "152.54.3.109", 8181));
+        QName portQName = new QName("http://demultiplex.bergmips.ws.mapseq.unc.edu", "BergMIPsDemultiplexPort");
+        service.addPort(portQName, SOAPBinding.SOAP11HTTP_BINDING, String.format("http://%s:%d/cxf/BergMIPsDemultiplexService", "152.54.3.109", 8181));
         BergMIPsDemultiplexService casavaService = service.getPort(BergMIPsDemultiplexService.class);
 
         Client cl = ClientProxy.getClient(casavaService);

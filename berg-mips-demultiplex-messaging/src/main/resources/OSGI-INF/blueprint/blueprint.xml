@@ -15,8 +15,8 @@
  <bean id="BergMIPsDemultiplexMessagingService" class="edu.unc.mapseq.messaging.bergmips.demultiplex.BergMIPsDemultiplexMessageService" init-method="start"
   destroy-method="stop" activation="eager">
   <property name="connectionFactory" ref="connectionFactory" />
-  <property name="messageListener" ref="GSCASAVAMessageListener" />
-  <property name="destinationName" value="queue/gs.casava" />
+  <property name="messageListener" ref="BergMIPsDemultiplexMessageListener" />
+  <property name="destinationName" value="queue/bergmips.demultiplex" />
  </bean>
 
 </blueprint>

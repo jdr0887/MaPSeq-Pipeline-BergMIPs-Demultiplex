@@ -23,9 +23,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.NON_EMPTY)
 @MTOM(enabled = true, threshold = 0)
 @BindingType(value = javax.xml.ws.soap.SOAPBinding.SOAP11HTTP_MTOM_BINDING)
-@WebService(targetNamespace = "http://casava.gs.ws.mapseq.unc.edu", serviceName = "GSCASAVAService", portName = "GSCASAVAPort")
+@WebService(targetNamespace = "http://demultiplex.bergmips.ws.mapseq.unc.edu", serviceName = "BergMIPsDemultiplexService", portName = "BergMIPsDemultiplexPort")
 @SOAPBinding(style = Style.DOCUMENT, use = Use.LITERAL, parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
-@Path("/GSCASAVAService/")
+@Path("/BergMIPsDemultiplexService/")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public interface BergMIPsDemultiplexService {

@@ -34,7 +34,7 @@ public class BergMIPsDemultiplexServiceImpl implements BergMIPsDemultiplexServic
         try {
 
             String mapseqOutputDirectory = System.getenv("MAPSEQ_OUTPUT_DIRECTORY");
-            File studyDir = new File(mapseqOutputDirectory, "GS");
+            File studyDir = new File(mapseqOutputDirectory, "BergMIPs");
             File sampleSheetDirectory = new File(studyDir, "SampleSheets");
             if (!sampleSheetDirectory.exists()) {
                 sampleSheetDirectory.mkdirs();
