@@ -1,0 +1,19 @@
+<features name="mapseq-pipeline-gs-casava-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.2.0">
+
+  <feature name="mapseq-pipeline-gs-casava" version="${project.version}" resolver="(obr)">
+    <bundle>mvn:org.jsoup/com.springsource.org.jsoup/1.5.2</bundle>
+    <bundle>mvn:edu.unc.mapseq.pipelines.gs-casava/gs-casava-commons/${project.version}</bundle>
+    <bundle>mvn:edu.unc.mapseq.pipelines.gs-casava/gs-casava-workflow/${project.version}</bundle>
+    <bundle>mvn:edu.unc.mapseq.pipelines.gs-casava/gs-casava-commands/${project.version}</bundle>
+    <bundle>mvn:edu.unc.mapseq.pipelines.gs-casava/gs-casava-ws-api/${project.version}</bundle>
+    <bundle>mvn:edu.unc.mapseq.pipelines.gs-casava/gs-casava-ws-impl/${project.version}</bundle>
+    <bundle start-level="100">mvn:edu.unc.mapseq.pipelines.gs-casava/gs-casava-executor/${project.version}</bundle>
+    <bundle start-level="100">mvn:edu.unc.mapseq.pipelines.gs-casava/gs-casava-messaging/${project.version}</bundle>
+  </feature>
+
+</features>
+
+
+
+
+

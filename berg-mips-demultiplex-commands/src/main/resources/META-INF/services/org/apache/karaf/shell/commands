@@ -1,0 +1,4 @@
+edu.unc.mapseq.commands.bergmips.demultiplex.RunWorkflowAction
+edu.unc.mapseq.commands.bergmips.demultiplex.RegisterToIRODSAction
+edu.unc.mapseq.commands.bergmips.demultiplex.SaveDemultiplexedStatsAttributesAction
+edu.unc.mapseq.commands.bergmips.demultiplex.SaveObservedClusterDensityAttributeAction
