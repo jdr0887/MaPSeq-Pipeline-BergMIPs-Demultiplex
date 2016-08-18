@@ -4,7 +4,7 @@
 
  <reference id="connectionFactory" interface="javax.jms.ConnectionFactory" />
 
- <reference id="BergMIPsDemultiplexWorkflowBeanService" interface="edu.unc.mapseq.workflow.WorkflowBeanService" component-name="BergMIPsDemultiplexAWorkflowBeanService" />
+ <reference id="BergMIPsDemultiplexWorkflowBeanService" interface="edu.unc.mapseq.workflow.WorkflowBeanService" component-name="BergMIPsDemultiplexWorkflowBeanService" />
 
  <bean id="BergMIPsDemultiplexMessageListener" class="edu.unc.mapseq.messaging.bergmips.demultiplex.BergMIPsDemultiplexMessageListener">
   <property name="workflowBeanService" ref="BergMIPsDemultiplexWorkflowBeanService" />
