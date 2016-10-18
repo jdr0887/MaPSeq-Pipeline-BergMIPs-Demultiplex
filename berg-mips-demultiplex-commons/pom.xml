@@ -2,13 +2,13 @@
   <parent>
     <groupId>edu.unc.mapseq.pipelines</groupId>
     <artifactId>berg-mips-demultiplex</artifactId>
-    <version>0.6.11-SNAPSHOT</version>
+    <version>0.6.11</version>
   </parent>
   <name>MaPSeq :: Pipelines :: BergMIPs :: Demultiplex :: Commons</name>
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.unc.mapseq.pipelines.berg-mips-demultiplex</groupId>
   <artifactId>berg-mips-demultiplex-commons</artifactId>
-  <version>0.6.11-SNAPSHOT</version>
+  <version>0.6.11</version>
   <packaging>bundle</packaging>
   <dependencies>
     <dependency>
