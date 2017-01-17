@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultDirectedGraph;
@@ -25,6 +24,7 @@ import org.renci.jlrm.condor.CondorJobEdge;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.unc.mapseq.commons.bergmips.demultiplex.CreateBasesMaskCallable;
 import edu.unc.mapseq.commons.bergmips.demultiplex.FindReadCountCallable;
 import edu.unc.mapseq.commons.bergmips.demultiplex.RegisterToIRODSRunnable;
 import edu.unc.mapseq.commons.bergmips.demultiplex.SaveDemultiplexedStatsAttributesRunnable;
@@ -70,7 +70,6 @@ public class BergMIPsDemultiplexWorkflow extends AbstractSequencingWorkflow {
 		WorkflowRun workflowRun = attempt.getWorkflowRun();
 
 		boolean allowMismatches = true;
-		Integer barcodeLength = Integer.valueOf(8);
 
 		String siteName = getWorkflowBeanService().getAttributes().get("siteName");
 		String flowcellStagingDirectory = getWorkflowBeanService().getAttributes().get("flowcellStagingDirectory");
@@ -79,9 +78,6 @@ public class BergMIPsDemultiplexWorkflow extends AbstractSequencingWorkflow {
 		for (Attribute attribute : workflowRunAttributeList) {
 			if (attribute.getName().equals("allowMismatches") && attribute.getValue().equalsIgnoreCase("false")) {
 				allowMismatches = false;
-			}
-			if (attribute.getName().equals("barcodeLength") && NumberUtils.isNumber(attribute.getValue())) {
-				barcodeLength = Integer.valueOf(attribute.getValue());
 			}
 		}
 
@@ -187,6 +183,10 @@ public class BergMIPsDemultiplexWorkflow extends AbstractSequencingWorkflow {
 
 				if (MapUtils.isNotEmpty(laneMap)) {
 
+					File runInfoXmlFile = new File(flowcellStagingDir, "RunInfo.xml");
+					String basesMask = Executors.newSingleThreadExecutor()
+							.submit(new CreateBasesMaskCallable(runInfoXmlFile, sampleSheetFile)).get();
+
 					for (Integer laneIndex : laneMap.keySet()) {
 
 						File unalignedDir = new File(bclFlowcellDir, String.format("%s.%d", "Unaligned", laneIndex));
@@ -196,10 +196,9 @@ public class BergMIPsDemultiplexWorkflow extends AbstractSequencingWorkflow {
 						builder.addArgument(ConfigureBCLToFastqCLI.INPUTDIR, baseCallsDir.getAbsolutePath())
 								.addArgument(ConfigureBCLToFastqCLI.IGNOREMISSINGBCL)
 								.addArgument(ConfigureBCLToFastqCLI.IGNOREMISSINGSTATS)
-								// .addArgument(ConfigureBCLToFastqCLI.INDEXLENGTH,
-								// barcodeLength)
+								.addArgument(ConfigureBCLToFastqCLI.BASESMASK, basesMask)
 								.addArgument(ConfigureBCLToFastqCLI.FASTQCLUSTERCOUNT, "0")
-								.addArgument(ConfigureBCLToFastqCLI.TILES, laneIndex.toString())
+								.addArgument(ConfigureBCLToFastqCLI.TILES, String.format("s_%d_*", laneIndex))
 								.addArgument(ConfigureBCLToFastqCLI.OUTPUTDIR, unalignedDir.getAbsolutePath())
 								.addArgument(ConfigureBCLToFastqCLI.SAMPLESHEET, sampleSheetFile.getAbsolutePath())
 								.addArgument(ConfigureBCLToFastqCLI.FORCE);
